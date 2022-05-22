@@ -25,6 +25,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Cache stuff
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ matrix.arch.target }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: install toolchain
         uses: actions-rs/toolchain@v1
